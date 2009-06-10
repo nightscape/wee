@@ -32,13 +32,13 @@ module Wee
     def start_tag(tag, attributes=nil, single=false)
       if attributes
         @port << "<#{tag}"
-        attributes.each {|k, v| 
+        attributes.each do |k, v|
           if v
-            @port << %[ #{ k }="#{ v }"] 
+            @port << %[ #{ k }="#{ v }"]
           else
-            @port << %[ #{ k }] 
+            @port << %[ #{ k }]
           end
-        }
+        end
         @port << (single ? SINGLE_CLOSING : CLOSING)
       else
         @port << (single ? "<#{tag} />" : "<#{tag}>")
