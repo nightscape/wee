@@ -99,13 +99,13 @@ module Wee
         @decoration = d
       else
         last_global = nil
-        each_decoration {|i| 
+        each_decoration do |i|
           if i.global?
             last_global = i
           else
             break
           end
-        }
+        end
         if last_global.nil?
           # no global decorations specified -> add in front
           d.next = @decoration

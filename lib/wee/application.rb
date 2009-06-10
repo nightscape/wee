@@ -68,14 +68,14 @@ module Wee
 
     def insert_session(session, retries=3)
       retries.times do
-        @mutex.synchronize {
+        @mutex.synchronize do
           id = @session_ids.next
           if @sessions[id].nil?
-            @sessions[id] = session 
+            @sessions[id] = session
             session.id = id
             return
           end
-        }
+        end
       end
       raise
     end

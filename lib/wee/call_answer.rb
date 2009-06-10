@@ -72,11 +72,11 @@ module Wee
     #
     def call(component, &return_callback)
       delegate = Wee::Delegate.new(component)
-      answer = Wee::AnswerDecoration.new {|answ|
+      answer = Wee::AnswerDecoration.new do |answ|
         remove_decoration(delegate)
-        component.remove_decoration(answer)       
+        component.remove_decoration(answer)
         return_callback.call(*answ.args) if return_callback
-      }
+      end
       add_decoration(delegate)
       component.add_decoration(answer)
       session.send_response(nil)
@@ -92,10 +92,10 @@ module Wee
       add_decoration(delegate)
       component.add_decoration(answer)
 
-      answ = Kernel.callcc {|cc|
+      answ = Kernel.callcc do |cc|
         answer.answer_callback = cc
         session.send_response(nil)
-      }
+      end
 
       remove_decoration(delegate)
       component.remove_decoration(answer)

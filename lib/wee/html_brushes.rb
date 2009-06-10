@@ -212,8 +212,8 @@ module Wee
     end
 
     def columns(*cols, &block)
-      with {
-        cols.each {|col|
+      with do
+        cols.each do |col|
           @canvas.table_data.with {
             if block
               block.call(col)
@@ -221,22 +221,22 @@ module Wee
               @canvas.text(col)
             end
           }
-        }
-      } 
+        end
+      end
     end
 
     def headings(*headers, &block)
-      with {
-        headers.each {|header|
-          @canvas.table_header.with {
+      with do
+        headers.each do |header|
+          @canvas.table_header.with do
             if block
               block.call(header)
             else
               @canvas.text(header)
             end
-          }
-        }
-      } 
+          end
+        end
+      end
     end
 
     def spanning_column(str, colspan)
