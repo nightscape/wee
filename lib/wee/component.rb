@@ -9,6 +9,7 @@ module Wee
   # #render in your own subclasses.
   #
   class Component < Presenter
+    attr_reader :children
 
     #
     # Initializes a newly created component.
@@ -90,6 +91,13 @@ module Wee
       each_child do |child|
         child.decoration.backtrack(state)
       end
+    end
+
+    def children
+      @children || []
+    end
+    def <<(child)
+      add_child(child)
     end
 
     protected
